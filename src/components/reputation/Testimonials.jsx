@@ -20,7 +20,6 @@ function ReviewCard(props) {
   const starRating = (rating) => {
     let stars = [];
     for (let i = 0; i < 5; i++) {
-      console.log(i, rating);
       if (i < rating) {
         stars.push(<StarIcon key={i} color='warning'/>);
       } else if (i + 0.5 === rating) {
@@ -97,7 +96,7 @@ export default function Testimonials() {
       </Box>
       <Grid container spacing={2}>
         {customerReviews.map((item) => (
-          <Grid item xs={6} sm={6} md={4} lg={3}> {/* Adjust the grid sizes as needed */}
+          <Grid item xs={6} sm={6} md={4} lg={3} key={item.name}> {/* Adjust the grid sizes as needed */}
             <ReviewCard name={item.name} comment={item.comment} rating={item.rating} />
           </Grid>
         ))}
