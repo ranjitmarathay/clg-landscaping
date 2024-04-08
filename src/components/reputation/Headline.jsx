@@ -20,12 +20,17 @@ export default function Headline(){
   <Container maxWidth="lg" sx={{ marginTop: 4, textAlign: "center" }}>
     <Box>
     <Typography fontSize={{ xs: 20, sm: 30, md: 40, lg: 50 }} component="div" sx={{ flexGrow: 1 }}>
-      Where Nature Meets Artisry
+      Your perfect yard <u>without lifting a finger</u>
     </Typography>
     </Box>
     <Box>
       <Typography fontSize={{ xs: 15, sm: 20, md: 25, lg: 30 }} component="div" sx={{ flexGrow: 1 }}>
         Trusted by 100+ Austinites
+      </Typography>
+    </Box>
+    <Box>
+      <Typography fontSize={{ xs: 15, sm: 20, md: 25, lg: 30 }} component="div" sx={{ flexGrow: 1 }}>
+        Call Us Today (512) 123-4567
       </Typography>
     </Box>
     <Box sx={{ flexGrow: 1, width: "100%" }}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button, Container, Box, IconButton, Menu, MenuItem } from '@mui/material';
+import { AppBar, Toolbar, Link, Typography, Button, Stack, Container, Box, IconButton, Menu, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
@@ -26,9 +26,11 @@ export default function Header() {
     <AppBar position="static" color="transparent" sx={{ marginBottom: 4 }}>
     <Container maxWidth={false}>
       <Toolbar disableGutters sx={{ padding: '0px' }}>
-        <Typography fontSize={{ xs: 22, sm: 28, md: 32, lg: 42 }} sx={{ flexGrow: 1 }}>
-          Perfect Landscaping
-        </Typography>
+        <Link href="" onClick={() => navigate('/')} color="#000" underline="none">
+          <Typography fontSize={{ xs: 22, sm: 28, md: 32, lg: 42 }} sx={{ flexGrow: 1 }}>
+            Perfect Landscaping
+          </Typography>
+        </Link>
         {isMobile ? (
           <>
             <IconButton
@@ -59,31 +61,35 @@ export default function Header() {
               <MenuItem onClick={() => { navigate("/"); handleClose(); }}>Home</MenuItem>
               <MenuItem onClick={() => { navigate("/about"); handleClose(); }}>About Us</MenuItem>
               <MenuItem onClick={() => { navigate("/services"); handleClose(); }}>Services</MenuItem>
-              <MenuItem onClick={() => { navigate("/contact"); handleClose(); }}>Contact</MenuItem>
+              <MenuItem onClick={() => { navigate("/quote"); handleClose(); }}>Get A Quote</MenuItem>
+              {/* <MenuItem onClick={() => { navigate("/contact"); handleClose(); }}>Contact</MenuItem> */}
             </Menu>
           </>
         ) : (
-          <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'flex-end' }}>
-            <Button color="inherit" onClick={() => navigate("/")}>
+          <Stack sx={{ display: 'flex', flexGrow: 1, justifyContent: 'flex-end'}} direction={'row'} spacing={2}>
+            {/* <Button color="inherit" onClick={() => navigate("/")}> */}
+            <Link href="" onClick={() => navigate('/')} color="#000" underline="none">
               <Typography fontSize={{ xs: 10, sm: 15, md: 20, lg: 22 }}>Home</Typography>  
-            </Button>
-            <Button color="inherit" onClick={() => navigate("/about")}>
+            </Link>
+            {/* </Button> */}
+            {/* <Button color="inherit" onClick={() => navigate("/about")}> */}
+            <Link href="" onClick={() => navigate('/about')} color="#000" underline="none">
               <Typography fontSize={{ xs: 10, sm: 15, md: 20, lg: 22 }}>About Us</Typography>
-            </Button>
-            <Button color="inherit" onClick={() => navigate("/services")}>
+            </Link>
+            {/* </Button> */}
+            {/* <Button color="inherit" onClick={() => navigate("/services")}> */}
+            <Link href="" onClick={() => navigate('/services')} color="#000" underline="none">
               <Typography fontSize={{ xs: 10, sm: 15, md: 18, lg: 22 }}>Services</Typography>
-            </Button>
-            <Button color="inherit" onClick={() => navigate("/contact")}>
+            </Link>
+            {/* </Button> */}
+            {/* <Button color="inherit" onClick={() => navigate("/contact")}>
               <Typography fontSize={{ xs: 10, sm: 15, md: 20, lg: 22 }}>Contact</Typography>
-            </Button>
+            </Button> */}
             <Button variant="contained" color="success" onClick={() => navigate("/quote")}>
               <Typography fontSize={{ xs: 10, sm: 15, md: 20, lg: 22 }}>Get a Quote</Typography>
             </Button>
-          </Box>
+          </Stack>
         )}
-        {/* <Typography fontSize={{ xs: 10, sm: 15, md: 20, lg: 25 }} component="div" sx={{ ml: 2 }}>
-          408-476-1238
-        </Typography> */}
       </Toolbar>
     </Container>
   </AppBar>

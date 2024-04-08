@@ -88,7 +88,7 @@ export default function Testimonials() {
 
 
   return (
-    <Container>
+    <Container sx={{paddingBottom: '10px'}}>
       <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2, padding: 6 }}>
         <Typography variant="h4" color="#000000">
           Rated {averageRating(customerReviews).toFixed(1)} by Our Satisfied Customers!
