@@ -20,7 +20,7 @@ function ServicesItem(props) {
           </Typography>
         </Box>
       </Grid>
-      <Grid item xs={12} lg={6} sx={{ alignContent: "center" }}>
+      <Grid item xs={12} lg={6}>
       <Box
         component="img"
         src={props.image}

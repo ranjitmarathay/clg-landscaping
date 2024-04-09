@@ -17,14 +17,12 @@ export default function AboutUs() {
 
       <Grid container spacing={2} my={4}>
         <Grid item xs={12} sm={6}>
-          <Paper elevation={3}>
             <Box
               component="img"
               src={landscaper}
               alt="Random landscape"
               sx={{ width: '100%', height: 'auto' }}
             />
-          </Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Box my={4}>
