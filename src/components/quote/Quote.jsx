@@ -12,7 +12,7 @@ import { useTheme } from '@mui/material/styles';
 
 export default function Quote() {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [quoteValue, setQuoteValue] = useState(0);
   const [timeSaved, setTimeSaved] = useState(0);
@@ -266,8 +266,14 @@ export default function Quote() {
               variant="body1"
               sx={{ fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem", lg: "1.1rem" }, marginTop: "10px" }}
             >
-              To capture these savings, give us a call now at (512) 456-7890
+              To capture these savings, give us a call now.
               {/* <a href={`mailto:youremail@example.com?subject=Quote&body=Your quote is $${quoteValue}`}>email me a copy of this quote</a> */}
+            </Typography>
+            <Typography 
+              variant="body1"
+              sx={{ fontSize: { xs: "1rem", sm: "1.1rem", md: "1.5rem", lg: "1.5rem" }, marginTop: "10px" }}
+            >
+              (512) 456-7890
             </Typography>
           </Box>
         )}

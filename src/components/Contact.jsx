@@ -1,4 +1,4 @@
-import { Container, Typography, Box, Grid, TextField, Button } from '@mui/material';
+import { Container, Typography, Box, TextField, Button } from '@mui/material';
 import React, { useState } from 'react';
 
 export default function Contact() {

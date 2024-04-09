@@ -4,7 +4,7 @@ import Home from './Home.jsx';
 import Header from './Header.jsx';
 import About from './About.jsx';
 import Services from './Services.jsx';
-import Contact from './Contact.jsx';
+// import Contact from './Contact.jsx';
 import Quote from './quote/Quote.jsx';
 import Footer from './Footer.jsx';
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid, Box, Typography, Container } from "@mui/material";
 
 import lawnCare from "../images/lawn_care.jpeg";
