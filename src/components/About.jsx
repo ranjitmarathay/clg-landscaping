@@ -15,8 +15,8 @@ export default function AboutUs() {
         </Typography>
       </Box>
 
-      <Grid container spacing={4} my={4}>
-        <Grid item xs={6} sm={6}>
+      <Grid container spacing={2} my={4}>
+        <Grid item xs={12} sm={6}>
           <Paper elevation={3}>
             <Box
               component="img"
@@ -26,7 +26,7 @@ export default function AboutUs() {
             />
           </Paper>
         </Grid>
-        <Grid item xs={6} sm={6}>
+        <Grid item xs={12} sm={6}>
           <Box my={4}>
             <Typography variant="h4" gutterBottom>
               Our Philosophy

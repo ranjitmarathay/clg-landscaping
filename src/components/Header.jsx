@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Link, Typography, Button, Stack, Container, IconButton, Menu, MenuItem } from '@mui/material';
+import { AppBar, Toolbar, Link, Box, Typography, Button, Stack, Container, IconButton, Menu, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
@@ -25,46 +25,46 @@ export default function Header() {
   return (
     <AppBar position="static" color="transparent" sx={{ marginBottom: 4 }}>
     <Container maxWidth={false}>
-      <Toolbar disableGutters sx={{ padding: '0px' }}>
-        <Link href="" onClick={() => navigate('/')} color="#000" underline="none">
-          <Typography fontSize={{ xs: 22, sm: 28, md: 32, lg: 42 }} sx={{ flexGrow: 1 }}>
-            Perfect Landscaping
-          </Typography>
-        </Link>
-        {isMobile ? (
-          <>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ ml: 2 }}
-              onClick={handleMenu}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={open}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={() => { navigate("/"); handleClose(); }}>Home</MenuItem>
-              <MenuItem onClick={() => { navigate("/about"); handleClose(); }}>About Us</MenuItem>
-              <MenuItem onClick={() => { navigate("/services"); handleClose(); }}>Services</MenuItem>
-              <MenuItem onClick={() => { navigate("/quote"); handleClose(); }}>Get A Quote</MenuItem>
-              {/* <MenuItem onClick={() => { navigate("/contact"); handleClose(); }}>Contact</MenuItem> */}
-            </Menu>
-          </>
+  <Toolbar disableGutters sx={{ padding: '0px' }}>
+    <Link href="" onClick={() => navigate('/')} color="#000" underline="none">
+      <Typography fontSize={{ xs: 22, sm: 28, md: 32, lg: 42 }}>
+        Perfect Landscaping
+      </Typography>
+    </Link>
+    <Box sx={{ flexGrow: 1 }} /> {/* Add this line to push the menu icon to the right */}
+    {isMobile ? (
+      <>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          onClick={handleMenu}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={open}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={() => { navigate("/"); handleClose(); }}>Home</MenuItem>
+          <MenuItem onClick={() => { navigate("/about"); handleClose(); }}>About Us</MenuItem>
+          <MenuItem onClick={() => { navigate("/services"); handleClose(); }}>Services</MenuItem>
+          <MenuItem onClick={() => { navigate("/quote"); handleClose(); }}>Get A Quote</MenuItem>
+          {/* <MenuItem onClick={() => { navigate("/contact"); handleClose(); }}>Contact</MenuItem> */}
+        </Menu>
+      </>
         ) : (
           <Stack sx={{ display: 'flex', flexGrow: 1, justifyContent: 'flex-end'}} direction={'row'} spacing={2}>
             {/* <Button color="inherit" onClick={() => navigate("/")}> */}
