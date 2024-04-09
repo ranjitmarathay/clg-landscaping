@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Typography, Box, Image, ImageList, ImageListItem } from '@mui/material'; 
+import { Container, Typography, Box, ImageList, ImageListItem } from '@mui/material'; 
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 

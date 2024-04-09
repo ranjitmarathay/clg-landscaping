@@ -6,9 +6,7 @@ import SelectServices from "./SelectServices";
 import ContactInfo from "./ContactInfo";
 import PickDayOfWeek from "./PickDayOfWeek";
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Pay from "./Pay";
 import { useTheme } from '@mui/material/styles';
-import { ArchiveTwoTone } from "@mui/icons-material";
 /* global google */
 
 
