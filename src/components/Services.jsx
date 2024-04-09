@@ -42,7 +42,7 @@ function ServicesItem(props) {
 export default function Services(props) {
 
   if (props.landingPage){
-
+    return null
   } else {
     return (
       <Container>
