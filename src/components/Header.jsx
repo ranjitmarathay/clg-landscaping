@@ -79,7 +79,7 @@ export default function Header() {
             {/* </Button> */}
             {/* <Button color="inherit" onClick={() => navigate("/services")}> */}
             <Link href="" onClick={() => navigate('/services')} color="#000" underline="none">
-              <Typography fontSize={{ xs: 10, sm: 15, md: 18, lg: 22 }}>Services</Typography>
+              <Typography fontSize={{ xs: 10, sm: 15, md: 20, lg: 22 }}>Services</Typography>
             </Link>
             {/* </Button> */}
             {/* <Button color="inherit" onClick={() => navigate("/contact")}>

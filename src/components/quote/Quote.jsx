@@ -8,11 +8,16 @@ import PickDayOfWeek from "./PickDayOfWeek";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Pay from "./Pay";
 import { useTheme } from '@mui/material/styles';
+import { ArchiveTwoTone } from "@mui/icons-material";
+/* global google */
 
 
 export default function Quote() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const [quoteValue, setQuoteValue] = useState(0);
+  const [timeSaved, setTimeSaved] = useState(0);
   
   const [selectedServices, setSelectedServices] = useState([
     {service: 'Lawn Care', selected: false},
@@ -69,20 +74,100 @@ export default function Quote() {
     });
   };
 
-  const generateQuote = () => {
-    let numSelectedServices = selectedServices.filter(service => service.selected).length
-    let numSelectedDays = Object.values(selectedDays).filter(day => day).length
+  function calculateDistance(originAddress, destinationTown) {
+    return new Promise((resolve, reject) => {
+      var service = new google.maps.DistanceMatrixService();
+      service.getDistanceMatrix(
+        {
+          origins: [originAddress],
+          destinations: [destinationTown],
+          travelMode: 'DRIVING',
+          unitSystem: google.maps.UnitSystem.IMPERIAL,
+        },
+        function(response, status) {
+          if (status === 'OK') {
+            var results = response.rows[0].elements;
+            var distance = results[0].distance;
+            var distanceText = distance.text;
+            var distanceValue = distance.value;
+            console.log('Distance: ' + distanceText + ' (' + distanceValue + ' meters)');
+            resolve([distanceValue, distanceText]);
+          } else {
+            console.log('Error: ' + status);
+            reject(status);
+          }
+        }
+      );
+    });
+  }
+  
+  const generateQuote = async () => {
+    let numSelectedServices = selectedServices.filter(service => service.selected).length;
+    let numSelectedDays = Object.values(selectedDays).filter(day => day).length;
     console.log("Generating Quote", numSelectedServices, numSelectedDays, address, timeOfDay, name, email, phone, message);
+  
     if(numSelectedServices > 0 && numSelectedDays > 0 && address !== "" && timeOfDay !== "" && name !== "" && email !== "" && phone !== "" && message !== "") {
       console.log("Generating Quote", selectedServices, selectedDays, address, timeOfDay, name, email, phone, message);
+      let days = Object.keys(selectedDays).filter(day => selectedDays[day]).join(", ");
+      let services = selectedServices.map(service => service.service).join(", ");
+  
+      var quoteValue = 0;
+      var timeSaved = 0;
+  
+      try {
+        const [distanceValue, distanceText] = await calculateDistance("111 E Cesar Chavez St, Austin, TX 78701", address);
+
+        console.log("Distance", distanceValue, distanceText);
+  
+        if (distanceValue <= 48280) {
+          quoteValue += 50;
+        } else if (distanceValue > 48280 && distanceValue <= 96560) {
+          quoteValue += 200;
+        } else {
+          alert("We are sorry, but we can only provide quotes within 60 miles of your location.");
+          return;
+        }
+  
+        if (timeOfDay === "Morning") {
+          quoteValue += 50;
+          timeSaved += 1.5;
+        } else if (timeOfDay === "Afternoon") {
+          quoteValue += 75;
+          timeSaved += 1.5;
+        } else if (timeOfDay === "Evening") {
+          quoteValue += 100;
+          timeSaved += 1.5;
+        }
+  
+        if (selectedDays.saturday || selectedDays.sunday) {
+          quoteValue += 60;
+          timeSaved += 2;
+        }
+  
+        if (services.includes("Paving")) {
+          quoteValue += 300;
+          timeSaved += 4;
+        } else if (services.includes("Gardening")) {
+          quoteValue += 125;
+          timeSaved += 2.5;
+        } else if (services.includes("Mulching")) {
+          quoteValue += 150;
+          timeSaved += 1.5;
+        } else if (services.includes("Pruning")) {
+          quoteValue += 175;
+          timeSaved += 2;
+        }
+  
+        // alert(`Your quote is $${quoteValue} for ${days} and ${services}`);
+        setQuoteValue(quoteValue)
+        setTimeSaved(timeSaved)
+      } catch (error) {
+        console.error('Error calculating distance:', error);
+      }
+    } else {
+      alert("Please fill out all required fields");
     }
-    else if(name !== "" && email !== "" && phone !== "" && message !== ""){
-      alert("Please include all contact information")
-    }
-    else{
-      alert("Please select at least one service and at least one day of the week")
-    }
-  }
+  };
   
 
   return (
@@ -122,7 +207,7 @@ export default function Quote() {
           marginTop={2}
           color="#000000"
         >
-          3. Select Time of Day
+          3. Select Time of Day Preference
         </Typography>
         <PickTimeDay selectedTime={timeOfDay} handleTimeChange={handleTimeChange} />
      </Box>
@@ -133,7 +218,7 @@ export default function Quote() {
           marginTop={2}
           color="#000000"
         >
-          4. Select Day of Week
+          4. Select Day of Week Preference
         </Typography>
         <PickDayOfWeek selectedDays={selectedDays} handleDayChange={handleDayChange}/>
       </Box>
@@ -161,6 +246,36 @@ export default function Quote() {
           Generate Instant Quote
         </Button>
      </Box>
+    <Box sx={{ paddingTop: "25px", paddingBottom: "25px" }}>
+        {quoteValue !== 0 && (
+          <Box sx={{ textAlign: "center", marginTop: "20px" }}>
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: "bold",
+                color: "#000000",
+              }}
+            >
+              Your Quote: ${quoteValue}
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{ fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem", lg: "1.1rem" }, marginTop: "10px" }}
+            >
+              You saved over ${quoteValue*.25} and {timeSaved} hours!
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{ fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem", lg: "1.1rem" }, marginTop: "10px" }}
+            >
+              To capture these savings, give us a call now at (512) 456-7890
+              {/* <a href={`mailto:youremail@example.com?subject=Quote&body=Your quote is $${quoteValue}`}>email me a copy of this quote</a> */}
+            </Typography>
+          </Box>
+        )}
+    </Box>
+
+
    </Container>
   );
 }
